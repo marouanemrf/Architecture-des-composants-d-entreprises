@@ -1,0 +1,30 @@
+
+"com.tp.metier.MetierImpl#calcul()Dƒ
+yC:/Users/marou/OneDrive/Desktop/Architecture-des-composants-d-entreprises/Tp1/src/main/java/com/tp/metier/MetierImpl.java ("1*ó
+1 (l
+j
+ (
+%0com.tp.dao.IDao"__id*A
+
+__unknown_file (%*#
+com.tp.metier.MetierImpl"
+daoxv
+ (
+%1double"com.tp.dao.IDao#getValue()D*3
+
+__unknown_file (
+
+%0com.tp.dao.IDao2
+getValue()h
+f
+ (!
+%2double"__calculate*
+ (
+**
+ (
+
+%1double*
+  (!2"
+ ("
+""B
+com.tp.metier.MetierImplHX

@@ -1,0 +1,7 @@
+organization=marouanemrf
+projectKey=marouanemrf_tp2
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.76487
+dashboardUrl=https://sonarcloud.io/dashboard?id=marouanemrf_tp2
+ceTaskId=AZp_X5HITq1Mxy_8UIlO
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZp_X5HITq1Mxy_8UIlO

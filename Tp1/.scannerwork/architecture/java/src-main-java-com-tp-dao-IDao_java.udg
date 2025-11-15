@@ -1,0 +1,66 @@
+
+1.0marouanemrf_tp2JavaFrontend"1763073555451*java2.BÅ
+'
+"src/main/java/com/tp/dao/IDao.java2
+	
+type3
+	
+MAIN4
+
+package6
+
+
+com.tp.dao7
+
+com.tp.dao.IDao9
+
+	interface10
+
+access11
+
+public12
+
+simple-name13
+
+
+IDao14
+!
+com.tp.dao.IDao#getValue()D16
+
+method17
+
+getValue18J
+
+1
+12
+
+
+3
+4Z
+
+5	
+576jÄ
+;
+86
+8910 *
+1 (:5B
+
+
+11
+12
+
+
+13
+14
+A
+15;
+151617 *
+1 (28:5B
+
+
+11
+12
+
+
+13
+18
