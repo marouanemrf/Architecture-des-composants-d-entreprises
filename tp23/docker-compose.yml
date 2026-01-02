@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  # Service de découverte
+  consul:
+    image: hashicorp/consul:latest
+    container_name: consul
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+    command: agent -dev -ui -client=0.0.0.0
+    networks:
+      - microservices-network
+
+  # Base de données
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: Micro_ClientDB
+    ports:
+      - "3309:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - microservices-network
+
+  # Service de gestion des clients
+  service-client:
+    build: ./Client
+    container_name: service-client
+    ports:
+      - "8088:8088"
+    depends_on:
+      - consul
+      - mysql
+    environment:
+      SPRING_CLOUD_CONSUL_HOST: consul
+      SPRING_CLOUD_CONSUL_PORT: 8500
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/Micro_ClientDB?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - microservices-network
+    restart: on-failure
+
+  # Passerelle API
+  gateway:
+    build: ./Gateway
+    container_name: gateway
+    ports:
+      - "8888:8888"
+    depends_on:
+      - consul
+      - service-client
+    environment:
+      SPRING_CLOUD_CONSUL_HOST: consul
+      SPRING_CLOUD_CONSUL_PORT: 8500
+    networks:
+      - microservices-network
+    restart: on-failure
+
+  # Service de gestion des véhicules
+  service-voiture:
+    build: ./Voiture
+    container_name: service-voiture
+    ports:
+      - "8082:8082"
+    depends_on:
+      - consul
+      - mysql
+    environment:
+      SPRING_CLOUD_CONSUL_HOST: consul
+      SPRING_CLOUD_CONSUL_PORT: 8500
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/Micro_VoitureDB?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - microservices-network
+    restart: on-failure
+
+networks:
+  microservices-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
