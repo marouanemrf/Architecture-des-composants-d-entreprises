@@ -1,0 +1,14 @@
+package com.example.car;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * Application de service voiture
+ */
+@SpringBootApplication
+public class ServiceCarApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceCarApplication.class, args);
+    }
+}
