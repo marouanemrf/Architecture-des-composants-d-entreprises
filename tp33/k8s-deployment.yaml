@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloud-platform-deployment
+  namespace: cloud-platform
+  labels:
+    app: cloud-microservice
+    version: "2.0.0"
+    managed-by: kubernetes
+    author: medori42
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cloud-microservice
+  template:
+    metadata:
+      labels:
+        app: cloud-microservice
+        version: "2.0.0"
+    spec:
+      containers:
+        - name: cloud-microservice-container
+          image: cloud-microservice-platform:2.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8081
+              name: http
+              protocol: TCP
+          env:
+            - name: APP_MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: cloud-platform-config
+                  key: app.message
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /api/hello
+              port: 8081
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/hello
+              port: 8081
+            initialDelaySeconds: 20
+            periodSeconds: 5

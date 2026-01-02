@@ -1,0 +1,10 @@
+﻿apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloud-platform-config
+  namespace: cloud-platform
+  labels:
+    app: cloud-microservice
+    author: medori42
+data:
+  app.message: "Bienvenue depuis Kubernetes ConfigMap - Cloud Platform par "
